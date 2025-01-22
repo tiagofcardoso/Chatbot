@@ -1,0 +1,351 @@
+:root {
+    --whatsapp-green: #075e54;
+    --whatsapp-light-green: #25d366;
+    --message-out: #dcf8c6;
+    --message-in: #ffffff;
+    --chat-bg: #efeae2;
+}
+
+#gtx-trans {
+    display: none !important;
+    position: fixed !important;
+    z-index: 9999;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+}
+
+.chat-container {
+    max-width: 900px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--chat-bg);
+    position: relative;
+    /* Prevent translation overlay */
+    translate: none !important;
+    transform: none !important;
+}
+
+.chat-header {
+    background: var(--whatsapp-green);
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.chat-header .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+    /* Prevent translation overlay */
+    translate: none !important;
+}
+
+.chat-header .avatar:hover {
+    transform: scale(4);
+    border-radius: 8px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    left: 30px;
+    top: 70px;
+}
+
+.chat-header .avatar:hover::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    z-index: -1;
+}
+
+.chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.message {
+    max-width: 45%;
+    margin: 40px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    position: relative;
+    animation: messageIn 0.3s ease-out;
+    word-wrap: break-word;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: messageIn 0.3s forwards;
+}
+
+.message.incoming {
+    background: var(--message-in);
+    margin-right: auto;
+    border-top-left-radius: 0;
+}
+
+.message.incoming::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url('../assets/images/bot-avatar.png');
+    background-size: cover;
+}
+
+.message.outgoing {
+    background: var(--message-out);
+    margin-left: auto;
+    border-top-right-radius: 0;
+}
+
+.chat-input-container {
+    background: #f0f0f0;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.input-container {
+    position: relative;
+    background: #f0f0f0;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 25px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #919191;
+    font-size: 1.2em;
+}
+
+.attachment-btn,
+.emoji-btn,
+.send-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.attachment-btn:hover,
+.emoji-btn:hover {
+    color: var(--whatsapp-green);
+}
+
+.attachment-options {
+    position: absolute;
+    bottom: 70px;
+    left: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.attachment-options.active {
+    display: flex;
+}
+
+.attachment-option {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 8px;
+}
+
+.attachment-option:hover {
+    background: #f0f0f0;
+}
+
+#message-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.send-btn {
+    background: var(--whatsapp-light-green);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--whatsapp-light-green);
+}
+
+.send-btn:hover {
+    background: var(--whatsapp-green);
+    transform: scale(1.05);
+    color: var(--whatsapp-green);
+}
+
+.send-btn i {
+    font-size: 1.2em;
+}
+
+.send-btn:active {
+    transform: scale(0.95);
+}
+
+.attachment-menu {
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    left: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.attachment-menu.show {
+    display: flex;
+    flex-direction: column;
+}
+
+.url-input {
+    display: none;
+    flex: 1;
+}
+
+.url-input.show {
+    display: block;
+}
+
+.attachment-dropdown {
+    position: relative;
+}
+
+.attachment-menu {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 250px;
+    padding: 8px;
+    display: none;
+}
+
+.attachment-menu.active {
+    display: block;
+}
+
+.attachment-option {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.attachment-option:hover {
+    background: #f5f5f5;
+}
+
+.attachment-option i {
+    width: 24px;
+    margin-right: 12px;
+    font-size: 1.2em;
+}
+
+.attachment-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #075e54;  /* Changed from #151414 to more visible gray */
+    font-size: 1.4em;  /* Increased size */
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.attachment-btn:hover {
+    color: var(--whatsapp-green);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.attachment-btn i {
+    display: inline-block;
+    transform: rotate(-45deg);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.input-wrapper input:focus {
+    outline: none;
+}
+
+* {
+    translate: none !important;
+}

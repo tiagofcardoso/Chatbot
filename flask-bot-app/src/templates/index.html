@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chat Bot{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-header">
+        <img src="{{ url_for('static', filename='assets/images/bot-avatar.png') }}" alt="Bot Avatar" class="avatar">
+        <h2>AI Assistant</h2>
+    </div>
+
+    <div class="chat-messages" id="chat-messages">
+        <!-- Messages will be inserted here -->
+    </div>
+
+    <div class="chat-footer">
+        <form id="message-form" class="input-container">
+            <div class="input-wrapper">
+                <div class="attachment-dropdown">
+                    <button type="button" class="attachment-btn" id="attachment-btn">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <div class="attachment-menu" id="attachment-menu">
+                        <label class="attachment-option">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>PDF</span>
+                            <input type="file" accept=".pdf" id="pdf-input" hidden>
+                        </label>
+                        <label class="attachment-option">
+                            <i class="fas fa-image"></i>
+                            <span>Image</span>
+                            <input type="file" accept="image/*" id="image-input" hidden>
+                        </label>
+                        <div class="attachment-option" id="url-option">
+                            <i class="fas fa-link"></i>
+                            <span>Web URL</span>
+                        </div>
+                        <div class="attachment-option" id="youtube-option">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" id="message-input" placeholder="Type a message">
+                <button type="submit" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
